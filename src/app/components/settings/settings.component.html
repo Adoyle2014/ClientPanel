@@ -1,3 +1,37 @@
-<p>
-  settings works!
-</p>
+<a routerLink="/">
+    <i class="fa fa-arrow-circle-o-left"></i>
+    Back to Dashboard
+</a>
+<div class="card mt-3">
+    <div class="card-header">
+        Edit settings
+    </div>
+        <div class="card-body">
+            <form (submit)="onSubmit()">
+                <div class="form-group">
+                    <label>Allow registration</label>
+                    <input type="checkbox" 
+                           name="allowRegistration"
+                           [checked]="settings.allowRegistration"
+                           (change)="settings.allowRegistration = !settings.allowRegistration"/>
+                </div>
+                <div class="form-group">
+                    <label>Disable balance on add</label>
+                    <input type="checkbox" 
+                           name="disableBalanceOnAdd" 
+                           [checked]="settings.disableBalanceOnAdd"
+                           (change)="settings.disableBalanceOnAdd = !settings.disableBalanceOnAdd"/>
+                </div>
+                <div class="form-group">
+                    <label>Disable balance on edit</label>
+                    <input type="checkbox" 
+                           name="disableBalanceonEdit"
+                           [checked]="settings.disableBalanceOnEdit"
+                           (change)="settings.disableBalanceOnEdit = !settings.disableBalanceOnEdit"/>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+
+
+</div>

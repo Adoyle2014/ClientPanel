@@ -77,8 +77,8 @@
                 <div class="invalid-feedback" [hidden]="!clientPhone.errors?.required">
                     Phone required
                 </div>
-                <div class="invalid-feedback" [hidden]="!clientPhone.errors?.pattern">
-                    Must be least 10 characters
+                <div class="invalid-feedback" [hidden]="!clientPhone.errors?.minlength">
+                    Must be at least 10 characters
                 </div>
             </div>
             <div class="form-group">

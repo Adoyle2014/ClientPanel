@@ -1,3 +1,47 @@
-<p>
-  register works!
-</p>
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="text-center mb-4 mt-4">
+                    Registration: let`s give this user access to database
+                </h3>
+                <form (ngSubmit)='onSubmit()'>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email"
+                               class="form-control"
+                               name="email"
+                               [ngClass]="{'is-invalid': clientEmail.errors && clientEmail.touched}"
+                               [(ngModel)]="email"
+                               #clientEmail="ngModel"
+                               id="email"
+                               pattern="^[-\w.]+@([A-z0-9][-A-z0-9]+\.)+[A-z]{2,4}$"
+                               required />
+                        <div class="invalid-feedback" [hidden]="!clientEmail?.required">
+                            Email required
+                        </div>
+                        <div class="invalid-feedback" [hidden]="!clientEmail.errors?.pattern">
+                            Must be example@example.com
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password"
+                               class="form-control"
+                               name="password"
+                               id="password"
+                               #clientPassword="ngModel"
+                               [ngClass]="{'is-invalid': clientPassword?.errors && clientPassword?.touched}"
+                               [(ngModel)]="password"
+                               required />
+                        <div class="invalid-feedback" [hidden]="!clientPassword?.required">
+                            Password required
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Register</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

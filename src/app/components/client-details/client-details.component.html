@@ -6,7 +6,7 @@
     </div>
     <div class="col-md-6">
         <div class="btn-group pull-right">
-            <a routerLink="/client/edit/{{ id }}" class="btn btn-dark">
+            <a routerLink="/client/edit/{{ currentRouterId }}" class="btn btn-dark">
                 Edit
             </a>
             <button class="btn btn-danger" (click)="onDelete();">Delete</button>
@@ -19,25 +19,28 @@
     <div class="card-body">
         <div class="row">
             <div class="cold-md-8 col-sm-6">
-                <h4>Client ID: {{ currentRouterId }}</h4>
+                <h4>Client ID: {{ client?.id }}</h4>
             </div>
             <div class="cold-md-8 col-sm-6">
                 <h3 class="pull-right">
                     Balance
-                    <span>
+                    <span [ngClass]="{'text-danger': !hasBalance, 'text-success': hasBalance}">
                        {{ client?.balance | currency: "USD" }}
                     </span>
                     <small>
-                        <a>
+                        <a (click)="showBalanceUpdateInput = !showBalanceUpdateInput ">
                             <i class="fa fa-pencil"></i>
                         </a>
                     </small>
                 </h3>
                 <div class="clearfix">
-                    <form>
+                    <form *ngIf="showBalanceUpdateInput" (ngSubmit)="updateBalance()">
                         <div class="input-group">
-                            <input type="text" name="balance" class="form-control">
-                            <span class="input-group-btn">
+                            <input type="text" 
+                                   name="balance" 
+                                   class="form-control"
+                                   [(ngModel)]="client.balance">
+                            <span class="input-group-btn ">
                                 <button type="submit" class="btn btn-primary">Update</button>
                             </span>
                         </div>

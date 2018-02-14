@@ -1,3 +1,104 @@
-<p>
-  edit-client works!
-</p>
+<a routerLink="/">
+    <i class="fa fa-arrow-circle-o-left"></i>
+    Back to Dashboard
+</a>
+
+<div class="card mt-3">
+    <div class="card-header">
+        Edit client
+    </div>
+    <div class="card-body" *ngIf="client; else noClient">
+        <form #clientForm="ngForm" (ngSubmit)="onSubmit(clientForm)">
+            <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input type="text"
+                       class="form-control"
+                       name="firstName"
+                       [ngClass]="{'is-invalid': clientFirstName.errors && clientFirstName.touched}"
+                       [(ngModel)]="client.firstName"
+                       #clientFirstName="ngModel"
+                       minlength="2"
+                       id="firstName"
+                       required>
+                <div class="invalid-feedback" [hidden]="!clientFirstName.errors?.required">
+                    First name required
+                </div>
+                <div class="invalid-feedback" [hidden]="!clientFirstName.errors?.minlength">
+                    Must be at least 2 characters
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text"
+                       class="form-control"
+                       name="lastName"
+                       [ngClass]="{'is-invalid': clientLastName.errors && clientLastName.touched}"
+                       [(ngModel)]="client.lastName"
+                       #clientLastName="ngModel"
+                       minlength="2"
+                       id="lastName"
+                       required>
+                <div class="invalid-feedback" [hidden]="!clientLastName.errors?.required">
+                    Last name required
+                </div>
+                <div class="invalid-feedback" [hidden]="!clientLastName.errors?.minlength">
+                    Must be at least 2 characters
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email"
+                       class="form-control"
+                       name="email"
+                       [ngClass]="{'is-invalid': clientEmail.errors && clientEmail.touched}"
+                       [(ngModel)]="client.email"
+                       #clientEmail="ngModel"
+                       pattern="^[-\w.]+@([A-z0-9][-A-z0-9]+\.)+[A-z]{2,4}$"
+                       id="email"
+                       required>
+                <div class="invalid-feedback" [hidden]="!clientEmail.errors?.required">
+                    Email required
+                </div>
+                <div class="invalid-feedback" [hidden]="!clientEmail.errors?.pattern">
+                    Must be example@example.com
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="text"
+                       class="form-control"
+                       name="phone"
+                       [ngClass]="{'is-invalid': clientPhone.errors && clientPhone.touched}"
+                       [(ngModel)]="client.phone"
+                       #clientPhone="ngModel"
+                       minlength="10"
+                       id="phone"
+                       required>
+                <div class="invalid-feedback" [hidden]="!clientPhone.errors?.required">
+                    Phone required
+                </div>
+                <div class="invalid-feedback" [hidden]="!clientPhone.errors?.minlength">
+                    Must be at least 10 characters
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="balance">Balance</label>
+                <input type="text"
+                       class="form-control"
+                       name="balance"
+                       [(ngModel)]="client.balance"
+                       [disabled]="disableBalanceOnEdit"
+                       #clientBalance="ngModel"
+                       id="balance"
+                       required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+        </form>
+    </div>
+</div>
+<ng-template #noClient>
+    <div class="alert alert-info mt-5">
+        Getting information...
+    </div>
+</ng-template>
+
